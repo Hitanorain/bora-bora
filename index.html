@@ -180,7 +180,7 @@ body{-webkit-touch-callout:none}
 </head>
 <body>
 <div id="view"></div><div id="uw"></div>
-<div id="title" class="glass"><h1>波拉波拉 · 火山环礁</h1><p>以大溪地 Bora Bora 为原型 · <span class="ver">v0.16</span></p><div id="alt"></div><div id="perf"></div></div><div id="note"></div>
+<div id="title" class="glass"><h1>波拉波拉 · 火山环礁</h1><p>以大溪地 Bora Bora 为原型 · <span class="ver">v0.16.1</span></p><div id="alt"></div><div id="perf"></div></div><div id="note"></div>
 <div id="mmWrap"><canvas id="mm"></canvas><div id="mmCtl"><button id="mmIn" aria-label="放大">＋</button><span id="mmLv">中</span><button id="mmOut" aria-label="缩小">－</button></div></div>
 <div id="stats" class="glass"><div class="lvrow"><b id="lvTxt">Lv 1</b><div class="trk xp"><i id="xpBar"></i></div><small id="xpTxt"></small></div>
  <div class="bar"><span>体力</span><div class="trk"><i id="spBar" style="background:linear-gradient(90deg,#5fd6a0,#b8f06a)"></i></div><b id="spVal">100</b></div>
@@ -212,12 +212,12 @@ body{-webkit-touch-callout:none}
  <h2 style="margin-top:16px">声音</h2><label class="row"><span class="lab">总音量</span><span class="val"></span><input type="range" id="vol" min="0" max="1" step="0.01" value="0.8"></label><label class="row"><span class="lab">音乐音量</span><span class="val"></span><input type="range" id="mvol" min="0" max="1" step="0.01" value="0.75"></label><button id="sndBtn">声音：开（N）</button>
  <button id="heroBtn" style="margin-top:10px;width:100%;border-radius:10px;padding:8px">更换角色</button>
  <button id="walkBtn">步行模式</button>
- <details id="verBox"><summary>更新日志 · 当前 v0.16</summary><ul id="verLog"></ul></details>
+ <details id="verBox"><summary>更新日志 · 当前 v0.16.1</summary><ul id="verLog"></ul></details>
 </div>
 <button id="panelToggle" class="glass">参数面板</button>
 <div id="help" class="glass"><b>W A S D</b> 移动　<b>按住左键 / Shift</b> 奔跑　<b>拖动鼠标</b> 转动镜头　<b>滚轮</b> 镜头远近　<b>X</b> 坐下<br><b>空格</b> 跳跃 / 飞行时上升　<b>Q</b> 飞行时下降　<b>Shift</b> 奔跑<br><b>左键</b> 点地面走过去 / 点怪物攻击　<b>J</b> 攻击<br><b>R</b> 切换刀剑/弓箭　<b>G</b> 指南<br><b>E</b> 互动（宝箱、采集、钓鱼）<br><b>B</b> 背包　<b>M</b> 小地图　<b>F</b> 步行/飞行<br><b>1–7</b> 传送　<b>H</b> 面板　<b>N</b> 静音　<b>L</b> 存档　<b>＋ / －</b> 地图缩放</div>
 <div id="joyBase"><div id="joy"></div></div><button id="jumpBtn" class="glass">跳</button>
-<div id="loader"><h1>火山环礁</h1><div class="sub ver">v0.16</div><div class="sub">海岛 · 潟湖 · 火山 · 鱼群</div><div class="track"><div id="bar"></div></div><div id="msg">正在加载…</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button id="start" disabled>生成中</button><button id="newGame" style="display:none">新的冒险</button></div>
+<div id="loader"><h1>火山环礁</h1><div class="sub ver">v0.16.1</div><div class="sub">海岛 · 潟湖 · 火山 · 鱼群</div><div class="track"><div id="bar"></div></div><div id="msg">正在加载…</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button id="start" disabled>生成中</button><button id="newGame" style="display:none">新的冒险</button></div>
 <div class="sub" style="font-size:12px;letter-spacing:.15em">建议用电脑或较新的手机，横屏体验更佳</div></div>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script>
@@ -325,8 +325,8 @@ const prog=(p,m)=>{if($('bar'))$('bar').style.width=(p*100).toFixed(1)+'%';if($(
 const yieldUI=()=>new Promise(r=>setTimeout(r,0));
 const rnd=(()=>{let s=20260101;return()=>{s=(s*16807)%2147483647;return s/2147483647}})();
 
-const VERSION='0.16';
-const CHANGELOG=[['0.16','手机端优化：横屏专用紧凑界面与竖屏转向提示、点开始自动全屏并锁定横屏（安卓）、浮动摇杆（推到底奔跑）、轻点地面走路/点怪物攻击；自动画质会识别手机与显卡档次，并按实际帧率自动升降画质档位'],['0.15','鼠标左键点击走路：点地面自动走过去（金色圆圈标记目标，按住 Shift 跑过去，方向键随时取消）；点怪物自动走近并朝它攻击，弓箭在射程内直接放箭'],['0.14','支持导入 VRoid 等软件制作的 VRM 人物模型（models 文件夹），沿用现有全部动作并带头发物理与眨眼；「凯」暂用 VRoid 官方 CC0 示例模型做技术验证'],['0.13.1','修复「更换角色」无法切换：角色选择界面缺少样式，被游戏画面遮挡无法点击；新游戏开局的选角界面同样恢复显示。更换角色时点击空白处可取消'],['0.13','三位原创可选角色：海风剑士「凯」、晨星旅人「露希娅」、森林守护者「若叶」，开局选择并可随时更换'],['0.12','第三人称与人物模型（走、跑、跳、坐、挥剑、拉弓、切换武器、钓鱼、倒地动作）、按住左键奔跑与体力条、弓箭新增攻速与射程属性'],['0.11','背包与装备界面重做：悬停提示、右键使用/装备、数量角标、按部位筛选、一键穿戴最佳装备、实时角色属性与装备对比'],['0.10','弓箭与武器切换（自动锁定）、伊苏风格战斗曲、升级与开箱的大型音效和光柱、海滩贝壳海螺与螃蟹小海龟、气球挑战任务、玩法指南、经验按等级差调整'],['0.9.1','重新编曲的原野主题曲《潮风之歌》：旋律主导的乐队编制，长笛与小提琴主奏'],['0.9','海岛风背景音乐、精英战斗音乐与低血量危险音乐；精英怪增多并主动攻击（红名），普通怪物改为被攻击后才反击；树叶饱和度再降低'],['0.8.1','天空顶部色调恢复为 v0.4 的柔和蔚蓝；植物饱和度降低约两成'],['0.8','移除体力与饥饿系统（食物改为回复生命），画面鲜艳度调整：新的色调映射、减轻雾气与泛光、降低环境光'],['0.7','小地图缩放（含全岛视图）、果树增至 78 株并缩短刷新、怪物上限 240、完整存档系统（3 个存档位 + 自动存档 + 存档码导入导出）'],
+const VERSION='0.16.1';
+const CHANGELOG=[['0.16.1','手机/平板等触屏设备奔跑不再消耗体力（体力显示为 ∞），电脑端不变'],['0.16','手机端优化：横屏专用紧凑界面与竖屏转向提示、点开始自动全屏并锁定横屏（安卓）、浮动摇杆（推到底奔跑）、轻点地面走路/点怪物攻击；自动画质会识别手机与显卡档次，并按实际帧率自动升降画质档位'],['0.15','鼠标左键点击走路：点地面自动走过去（金色圆圈标记目标，按住 Shift 跑过去，方向键随时取消）；点怪物自动走近并朝它攻击，弓箭在射程内直接放箭'],['0.14','支持导入 VRoid 等软件制作的 VRM 人物模型（models 文件夹），沿用现有全部动作并带头发物理与眨眼；「凯」暂用 VRoid 官方 CC0 示例模型做技术验证'],['0.13.1','修复「更换角色」无法切换：角色选择界面缺少样式，被游戏画面遮挡无法点击；新游戏开局的选角界面同样恢复显示。更换角色时点击空白处可取消'],['0.13','三位原创可选角色：海风剑士「凯」、晨星旅人「露希娅」、森林守护者「若叶」，开局选择并可随时更换'],['0.12','第三人称与人物模型（走、跑、跳、坐、挥剑、拉弓、切换武器、钓鱼、倒地动作）、按住左键奔跑与体力条、弓箭新增攻速与射程属性'],['0.11','背包与装备界面重做：悬停提示、右键使用/装备、数量角标、按部位筛选、一键穿戴最佳装备、实时角色属性与装备对比'],['0.10','弓箭与武器切换（自动锁定）、伊苏风格战斗曲、升级与开箱的大型音效和光柱、海滩贝壳海螺与螃蟹小海龟、气球挑战任务、玩法指南、经验按等级差调整'],['0.9.1','重新编曲的原野主题曲《潮风之歌》：旋律主导的乐队编制，长笛与小提琴主奏'],['0.9','海岛风背景音乐、精英战斗音乐与低血量危险音乐；精英怪增多并主动攻击（红名），普通怪物改为被攻击后才反击；树叶饱和度再降低'],['0.8.1','天空顶部色调恢复为 v0.4 的柔和蔚蓝；植物饱和度降低约两成'],['0.8','移除体力与饥饿系统（食物改为回复生命），画面鲜艳度调整：新的色调映射、减轻雾气与泛光、降低环境光'],['0.7','小地图缩放（含全岛视图）、果树增至 78 株并缩短刷新、怪物上限 240、完整存档系统（3 个存档位 + 自动存档 + 存档码导入导出）'],
  ['0.6','战斗系统：剑、三种怪物、等级与分区、伤害公式、五级装备品质、宝箱'],['0.5','二次元卡通渲染风格与可互动的青草地'],
  ['0.4','小地图、生存系统、背包、采集、钓鱼'],['0.3','预览黑屏的兼容修复、画质档位、性能优化'],
  ['0.2','海浪与海鸟声、跳跃、滚轮缩放视角、水面倒影、泛光与体积光'],['0.1','火山环礁场景，可自由游走探索']];
@@ -890,6 +890,7 @@ const DEV=(()=>{const coarse=matchMedia('(pointer:coarse)').matches,ua=navigator
   let tier=mobile?(weak?'fast':'bal'):(weak?'bal':'high');try{const s=localStorage.getItem('boraIsle_tier');if(QL[s]&&s!=='ultra')tier=s}catch(e){}
   return{coarse,mobile,gpu,weak,tier}})();
 const AQ={tier:DEV.tier,low:0,good:0,warm:0};
+const INF_ST=DEV.mobile||DEV.coarse;   // touch devices: the stick makes running too easy to trigger, so sprinting costs no stamina
 let QK='auto',Q=QL[AQ.tier],dynScale=DEV.mobile?.75:.85;
 function makeRTs(){[sceneRT,reflRT,raysRT,...bloomRT].forEach(r=>r&&r.dispose());
   sceneRT=new THREE.WebGLRenderTarget(4,4,{type:HDR,samples:gl2?Math.min(MS,Q.ms):0});reflRT=new THREE.WebGLRenderTarget(4,4,{type:HDR});
@@ -1387,7 +1388,7 @@ let hudT=0;
 function updateHUD(dt){if(TEST||(hudT+=dt)<.2)return;hudT=0;const st=GS.st,hu=GS.hu;
   $('stats').classList.toggle('low',ctl.walk&&PY.hp<PS.hp*.3);
   $('mode').textContent=ctl.walk?'':'观察模式 · 怪物不会攻击';$('hpBar').style.width=(PY.hp/PS.hp*100)+'%';$('hpVal').textContent=Math.max(0,Math.round(PY.hp));
-  $('lvTxt').textContent=`Lv ${PY.lv}`;$('spBar').style.width=ST.v+'%';$('spBar').style.opacity=ST.lock?.45:1;$('spVal').textContent=Math.round(ST.v);$('xpBar').style.width=(PY.lv>=50?100:PY.xp/xpNeed(PY.lv)*100)+'%';$('xpTxt').textContent=PY.lv>=50?'已满级':`${PY.xp} / ${xpNeed(PY.lv)}`}
+  $('lvTxt').textContent=`Lv ${PY.lv}`;$('spBar').style.width=ST.v+'%';$('spBar').style.opacity=ST.lock?.45:1;$('spVal').textContent=INF_ST?'∞':Math.round(ST.v);$('xpBar').style.width=(PY.lv>=50?100:PY.xp/xpNeed(PY.lv)*100)+'%';$('xpTxt').textContent=PY.lv>=50?'已满级':`${PY.xp} / ${xpNeed(PY.lv)}`}
 // minimap
 const MMR=2100;let mmBase=null;
 function buildMinimap(){const N=512,hs=new Float32Array(N*N);for(let j=0;j<N;j++)for(let i=0;i<N;i++)hs[j*N+i]=H((i/N*2-1)*MMR,(j/N*2-1)*MMR);
@@ -2092,7 +2093,7 @@ function sitToggle(){if(!ctl.walk||PY.dead)return;PA.sit=!PA.sit;if(PA.sit)toast
 function sprinting(){const k=ctl.keys,mv=(k.KeyW||k.KeyA||k.KeyS||k.KeyD||k.ArrowUp||k.ArrowDown||k.ArrowLeft||k.ArrowRight||Math.hypot(...ctl.touchMove)>.3||!!ctl.mv);
   const want=mv&&(k.ShiftLeft||k.ShiftRight||(ctl.lmb&&performance.now()-ctl.lmb>180)||Math.hypot(...ctl.touchMove)>.95);   // stick pushed to the rim = run
   return ctl.walk&&want&&!ST.lock&&ST.v>0}
-function updateStamina(dt,t){if(ctl.running){ST.v=Math.max(0,ST.v-20*dt);ST.last=t;if(ST.v<=0){ST.lock=true;toast('体力耗尽，先走一会儿吧','#ffd98a')}}
+function updateStamina(dt,t){if(INF_ST){ST.v=100;ST.lock=false;return}if(ctl.running){ST.v=Math.max(0,ST.v-20*dt);ST.last=t;if(ST.v<=0){ST.lock=true;toast('体力耗尽，先走一会儿吧','#ffd98a')}}
   else if(t-ST.last>.8)ST.v=Math.min(100,ST.v+14*dt);if(ST.lock&&ST.v>=25)ST.lock=false}
 function updatePlayer(t,dt){const third=ctl.walk;VIEW=third?tpCam:camera;HERO.root.visible=third;
   const e=camera.position,feet=new THREE.Vector3(e.x,e.y-1.7,e.z);
