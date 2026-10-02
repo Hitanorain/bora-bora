@@ -2,7 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="theme-color" content="#0b1820">
 <title>波拉波拉 · 火山环礁</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
@@ -141,11 +142,45 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 #msg{font-size:12px;color:var(--dim);letter-spacing:.15em;min-height:1.5em}
 #start{font-size:15px;padding:12px 34px;letter-spacing:.35em;background:linear-gradient(180deg,#ffe2bd,#ffae68);color:#2a1406;border:0;font-weight:500}
 #start:disabled{opacity:.4}
+/* ---------- phones & tablets ---------- */
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+body{-webkit-touch-callout:none}
+#fsBtn{display:none}
+#rotate{position:fixed;inset:0;z-index:40;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at 50% 40%,#123b46,#05121a 70%);text-align:center;padding:24px}
+#rotate b{font-family:"Noto Serif SC",serif;font-size:22px;letter-spacing:.2em}#rotate small{color:var(--dim);font-size:13px;letter-spacing:.12em}
+#rotate .ph{width:44px;height:76px;border:3px solid var(--fg);border-radius:9px;position:relative;animation:rot 2.4s ease-in-out infinite}
+#rotate .ph::after{content:'';position:absolute;left:50%;bottom:5px;width:10px;height:3px;margin-left:-5px;border-radius:2px;background:var(--fg)}
+@keyframes rot{0%,20%{transform:rotate(0)}50%,80%{transform:rotate(-90deg)}100%{transform:rotate(0)}}
+@media (pointer:coarse) and (orientation:portrait) and (max-width:620px){#rotate{display:flex}}
+#btnRow #panelToggle{position:static}
+@media (pointer:coarse){#fsBtn.can{display:inline-block}#joyBase{transition:opacity .2s;opacity:.55}#joyBase.on{opacity:1}}
+/* landscape phone: short screen, keep the HUD in the corners and thumbs zones clear */
+@media (pointer:coarse) and (max-height:520px){
+ #title{left:calc(env(safe-area-inset-left,0px) + 10px);top:calc(env(safe-area-inset-top,0px) + 8px);padding:6px 12px;border-radius:12px}
+ #title h1{font-size:14px;letter-spacing:.12em}#title p{display:none}#alt{margin-top:2px;font-size:11px}#perf{font-size:10px}
+ #mmWrap{left:calc(env(safe-area-inset-left,0px) + 12px);top:calc(env(safe-area-inset-top,0px) + 74px);width:112px;height:112px}
+ #mmCtl{bottom:-12px}#mmCtl button{width:22px;height:22px}
+ #btnRow{left:auto;right:calc(env(safe-area-inset-right,0px) + 10px);top:calc(env(safe-area-inset-top,0px) + 8px);gap:5px}
+ #btnRow button{padding:6px 10px;font-size:12px}
+ #panel{top:calc(env(safe-area-inset-top,0px) + 48px);right:calc(env(safe-area-inset-right,0px) + 10px);width:240px;max-height:calc(100% - 60px - env(safe-area-inset-top,0px))}
+ #stats{bottom:calc(env(safe-area-inset-bottom,0px) + 6px);width:min(300px,38vw);padding:6px 12px}#stats .bar{font-size:11px;margin:1px 0}#mode{display:none}
+ #prompt{bottom:calc(env(safe-area-inset-bottom,0px) + 74px);font-size:13px}
+ #toasts{top:calc(env(safe-area-inset-top,0px) + 46px)}.toast{font-size:12px;padding:6px 12px}
+ #quest{top:calc(env(safe-area-inset-top,0px) + 8px);font-size:12px}
+ #joyBase{left:calc(env(safe-area-inset-left,0px) + 34px);bottom:calc(env(safe-area-inset-bottom,0px) + 26px);width:120px;height:120px}#joy{left:38px;top:38px;width:44px;height:44px}
+ #atkBtn{right:calc(env(safe-area-inset-right,0px) + 26px);bottom:calc(env(safe-area-inset-bottom,0px) + 26px);width:80px;height:80px;font-size:17px}
+ #jumpBtn{right:calc(env(safe-area-inset-right,0px) + 122px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);width:60px;height:60px}
+ #swBtn{right:calc(env(safe-area-inset-right,0px) + 112px);bottom:calc(env(safe-area-inset-bottom,0px) + 92px);width:54px;height:54px}
+ #actBtn{right:calc(env(safe-area-inset-right,0px) + 34px);bottom:calc(env(safe-area-inset-bottom,0px) + 122px);width:58px;height:58px}
+ #heroCards{gap:10px}.hcard{width:200px;padding:8px;gap:2px}.hpic{width:120px;height:150px}.hn{font-size:17px}.hcard p{font-size:11px;line-height:1.55}
+ #heroSel{justify-content:flex-start;gap:8px}#heroSel .title{font-size:22px!important}
+ #bag,#savePanel,#guide{max-height:calc(100% - 20px)}#gmap{width:200px;height:200px}
+}
 </style>
 </head>
 <body>
 <div id="view"></div><div id="uw"></div>
-<div id="title" class="glass"><h1>波拉波拉 · 火山环礁</h1><p>以大溪地 Bora Bora 为原型 · <span class="ver">v0.15</span></p><div id="alt"></div><div id="perf"></div></div><div id="note"></div>
+<div id="title" class="glass"><h1>波拉波拉 · 火山环礁</h1><p>以大溪地 Bora Bora 为原型 · <span class="ver">v0.16</span></p><div id="alt"></div><div id="perf"></div></div><div id="note"></div>
 <div id="mmWrap"><canvas id="mm"></canvas><div id="mmCtl"><button id="mmIn" aria-label="放大">＋</button><span id="mmLv">中</span><button id="mmOut" aria-label="缩小">－</button></div></div>
 <div id="stats" class="glass"><div class="lvrow"><b id="lvTxt">Lv 1</b><div class="trk xp"><i id="xpBar"></i></div><small id="xpTxt"></small></div>
  <div class="bar"><span>体力</span><div class="trk"><i id="spBar" style="background:linear-gradient(90deg,#5fd6a0,#b8f06a)"></i></div><b id="spVal">100</b></div>
@@ -163,11 +198,13 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
  <p>建议在与自己等级相近的区域战斗。挑战高于自己的怪物经验更多（最多 +50%），打比自己低 3 级以上的怪物经验会大幅减少。</p>
  <h3>怪物</h3><p>普通怪物只有被攻击才会反击；<b style="color:#ff4d5e">红名精英怪</b>会主动追击，掉落更好的装备。</p>
  <h3>战斗</h3><p>左键点击地面会自动走过去（按住 Shift 跑过去，按方向键随时取消）；点击怪物会自动走近并攻击。J 直接攻击前方，R 切换刀剑和弓箭。弓箭会自动锁定准星附近的敌人。生命低了就打开背包（B）吃东西回血。</p>
+ <h3>手机操作</h3><p>横屏游玩。左半边屏幕按住拖动是摇杆（推到底会奔跑），右半边滑动转镜头、双指缩放；轻点地面走过去，轻点怪物自动走近攻击。右下角是攻击、跳跃、切换武器和互动按钮。</p>
  <h3>宝箱与挑战</h3><p>宝箱散布全岛，越往中心越稀有。地图上的 <b style="color:#ffd34f">黄色“!”</b> 是气球挑战：限时射落所有气球可以拿到装备和大量经验。</p>
  <h3>采集</h3><p>发光的果树可以采集果实；海滩上的彩色贝壳和海螺可以拾取，未来会用于制作。</p>
  </div></div></div>
 <div id="heroSel" class="overlay hide"><h2 class="title" style="font-size:clamp(26px,4vw,40px)">选择你的冒险者</h2><div id="heroCards"></div></div>
-<div id="btnRow"><button id="bagBtn" class="glass">背包 B</button><button id="mapBtn" class="glass">地图 M</button><button id="saveBtn" class="glass">存档 L</button><button id="guideBtn" class="glass">指南 G</button></div><button id="actBtn" class="glass">互动</button><button id="atkBtn" class="glass">攻击</button><button id="swBtn" class="glass">切换</button>
+<div id="btnRow"><button id="bagBtn" class="glass">背包 B</button><button id="mapBtn" class="glass">地图 M</button><button id="saveBtn" class="glass">存档 L</button><button id="guideBtn" class="glass">指南 G</button><button id="fsBtn" class="glass">全屏</button></div>
+<div id="rotate"><div class="ph"></div><b>请把手机横过来</b><small>横屏操作更舒适，画面也更大</small></div><button id="actBtn" class="glass">互动</button><button id="atkBtn" class="glass">攻击</button><button id="swBtn" class="glass">切换</button>
 <div id="panel" class="glass">
  <h2>画质</h2><div id="qual"><button data-k="auto">自动</button><button data-k="ultra">极致</button><button data-k="high">高</button><button data-k="bal">均衡</button><button data-k="fast">流畅</button></div>
  <h2 style="margin-top:16px">环境参数</h2><div id="sliders"></div>
@@ -175,12 +212,12 @@ button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
  <h2 style="margin-top:16px">声音</h2><label class="row"><span class="lab">总音量</span><span class="val"></span><input type="range" id="vol" min="0" max="1" step="0.01" value="0.8"></label><label class="row"><span class="lab">音乐音量</span><span class="val"></span><input type="range" id="mvol" min="0" max="1" step="0.01" value="0.75"></label><button id="sndBtn">声音：开（N）</button>
  <button id="heroBtn" style="margin-top:10px;width:100%;border-radius:10px;padding:8px">更换角色</button>
  <button id="walkBtn">步行模式</button>
- <details id="verBox"><summary>更新日志 · 当前 v0.15</summary><ul id="verLog"></ul></details>
+ <details id="verBox"><summary>更新日志 · 当前 v0.16</summary><ul id="verLog"></ul></details>
 </div>
 <button id="panelToggle" class="glass">参数面板</button>
 <div id="help" class="glass"><b>W A S D</b> 移动　<b>按住左键 / Shift</b> 奔跑　<b>拖动鼠标</b> 转动镜头　<b>滚轮</b> 镜头远近　<b>X</b> 坐下<br><b>空格</b> 跳跃 / 飞行时上升　<b>Q</b> 飞行时下降　<b>Shift</b> 奔跑<br><b>左键</b> 点地面走过去 / 点怪物攻击　<b>J</b> 攻击<br><b>R</b> 切换刀剑/弓箭　<b>G</b> 指南<br><b>E</b> 互动（宝箱、采集、钓鱼）<br><b>B</b> 背包　<b>M</b> 小地图　<b>F</b> 步行/飞行<br><b>1–7</b> 传送　<b>H</b> 面板　<b>N</b> 静音　<b>L</b> 存档　<b>＋ / －</b> 地图缩放</div>
 <div id="joyBase"><div id="joy"></div></div><button id="jumpBtn" class="glass">跳</button>
-<div id="loader"><h1>火山环礁</h1><div class="sub ver">v0.15</div><div class="sub">海岛 · 潟湖 · 火山 · 鱼群</div><div class="track"><div id="bar"></div></div><div id="msg">正在加载…</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button id="start" disabled>生成中</button><button id="newGame" style="display:none">新的冒险</button></div>
+<div id="loader"><h1>火山环礁</h1><div class="sub ver">v0.16</div><div class="sub">海岛 · 潟湖 · 火山 · 鱼群</div><div class="track"><div id="bar"></div></div><div id="msg">正在加载…</div><div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button id="start" disabled>生成中</button><button id="newGame" style="display:none">新的冒险</button></div>
 <div class="sub" style="font-size:12px;letter-spacing:.15em">建议用电脑或较新的手机，横屏体验更佳</div></div>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script>
@@ -288,8 +325,8 @@ const prog=(p,m)=>{if($('bar'))$('bar').style.width=(p*100).toFixed(1)+'%';if($(
 const yieldUI=()=>new Promise(r=>setTimeout(r,0));
 const rnd=(()=>{let s=20260101;return()=>{s=(s*16807)%2147483647;return s/2147483647}})();
 
-const VERSION='0.15';
-const CHANGELOG=[['0.15','鼠标左键点击走路：点地面自动走过去（金色圆圈标记目标，按住 Shift 跑过去，方向键随时取消）；点怪物自动走近并朝它攻击，弓箭在射程内直接放箭'],['0.14','支持导入 VRoid 等软件制作的 VRM 人物模型（models 文件夹），沿用现有全部动作并带头发物理与眨眼；「凯」暂用 VRoid 官方 CC0 示例模型做技术验证'],['0.13.1','修复「更换角色」无法切换：角色选择界面缺少样式，被游戏画面遮挡无法点击；新游戏开局的选角界面同样恢复显示。更换角色时点击空白处可取消'],['0.13','三位原创可选角色：海风剑士「凯」、晨星旅人「露希娅」、森林守护者「若叶」，开局选择并可随时更换'],['0.12','第三人称与人物模型（走、跑、跳、坐、挥剑、拉弓、切换武器、钓鱼、倒地动作）、按住左键奔跑与体力条、弓箭新增攻速与射程属性'],['0.11','背包与装备界面重做：悬停提示、右键使用/装备、数量角标、按部位筛选、一键穿戴最佳装备、实时角色属性与装备对比'],['0.10','弓箭与武器切换（自动锁定）、伊苏风格战斗曲、升级与开箱的大型音效和光柱、海滩贝壳海螺与螃蟹小海龟、气球挑战任务、玩法指南、经验按等级差调整'],['0.9.1','重新编曲的原野主题曲《潮风之歌》：旋律主导的乐队编制，长笛与小提琴主奏'],['0.9','海岛风背景音乐、精英战斗音乐与低血量危险音乐；精英怪增多并主动攻击（红名），普通怪物改为被攻击后才反击；树叶饱和度再降低'],['0.8.1','天空顶部色调恢复为 v0.4 的柔和蔚蓝；植物饱和度降低约两成'],['0.8','移除体力与饥饿系统（食物改为回复生命），画面鲜艳度调整：新的色调映射、减轻雾气与泛光、降低环境光'],['0.7','小地图缩放（含全岛视图）、果树增至 78 株并缩短刷新、怪物上限 240、完整存档系统（3 个存档位 + 自动存档 + 存档码导入导出）'],
+const VERSION='0.16';
+const CHANGELOG=[['0.16','手机端优化：横屏专用紧凑界面与竖屏转向提示、点开始自动全屏并锁定横屏（安卓）、浮动摇杆（推到底奔跑）、轻点地面走路/点怪物攻击；自动画质会识别手机与显卡档次，并按实际帧率自动升降画质档位'],['0.15','鼠标左键点击走路：点地面自动走过去（金色圆圈标记目标，按住 Shift 跑过去，方向键随时取消）；点怪物自动走近并朝它攻击，弓箭在射程内直接放箭'],['0.14','支持导入 VRoid 等软件制作的 VRM 人物模型（models 文件夹），沿用现有全部动作并带头发物理与眨眼；「凯」暂用 VRoid 官方 CC0 示例模型做技术验证'],['0.13.1','修复「更换角色」无法切换：角色选择界面缺少样式，被游戏画面遮挡无法点击；新游戏开局的选角界面同样恢复显示。更换角色时点击空白处可取消'],['0.13','三位原创可选角色：海风剑士「凯」、晨星旅人「露希娅」、森林守护者「若叶」，开局选择并可随时更换'],['0.12','第三人称与人物模型（走、跑、跳、坐、挥剑、拉弓、切换武器、钓鱼、倒地动作）、按住左键奔跑与体力条、弓箭新增攻速与射程属性'],['0.11','背包与装备界面重做：悬停提示、右键使用/装备、数量角标、按部位筛选、一键穿戴最佳装备、实时角色属性与装备对比'],['0.10','弓箭与武器切换（自动锁定）、伊苏风格战斗曲、升级与开箱的大型音效和光柱、海滩贝壳海螺与螃蟹小海龟、气球挑战任务、玩法指南、经验按等级差调整'],['0.9.1','重新编曲的原野主题曲《潮风之歌》：旋律主导的乐队编制，长笛与小提琴主奏'],['0.9','海岛风背景音乐、精英战斗音乐与低血量危险音乐；精英怪增多并主动攻击（红名），普通怪物改为被攻击后才反击；树叶饱和度再降低'],['0.8.1','天空顶部色调恢复为 v0.4 的柔和蔚蓝；植物饱和度降低约两成'],['0.8','移除体力与饥饿系统（食物改为回复生命），画面鲜艳度调整：新的色调映射、减轻雾气与泛光、降低环境光'],['0.7','小地图缩放（含全岛视图）、果树增至 78 株并缩短刷新、怪物上限 240、完整存档系统（3 个存档位 + 自动存档 + 存档码导入导出）'],
  ['0.6','战斗系统：剑、三种怪物、等级与分区、伤害公式、五级装备品质、宝箱'],['0.5','二次元卡通渲染风格与可互动的青草地'],
  ['0.4','小地图、生存系统、背包、采集、钓鱼'],['0.3','预览黑屏的兼容修复、画质档位、性能优化'],
  ['0.2','海浪与海鸟声、跳跃、滚轮缩放视角、水面倒影、泛光与体积光'],['0.1','火山环礁场景，可自由游走探索']];
@@ -844,7 +881,16 @@ const NBL=6;let sceneRT=null,reflRT=null,raysRT=null,bloomRT=[],MS=gl2?4:0,DIREC
 const BASE_DPR=Math.min(window.devicePixelRatio||1,2);
 const QL={ultra:{n:'极致',gr:48,scale:1,ms:4,refl:2,sh:4096,grass:450,bush:1200,tree:1e9,rays:1},high:{n:'高',gr:40,scale:.85,ms:4,refl:2,sh:4096,grass:320,bush:800,tree:2600,rays:1},
   bal:{n:'均衡',gr:30,scale:.7,ms:2,refl:3,sh:2048,grass:200,bush:500,tree:1800,rays:1},fast:{n:'流畅',gr:20,scale:.55,ms:0,refl:0,sh:2048,grass:120,bush:300,tree:1200,rays:0}};
-let QK='auto',Q=QL.high,dynScale=.85;
+// device sniffing for the auto preset: phones start lower, weak GPUs start at 流畅; the tier then follows the measured fps (perfTick)
+const DEV=(()=>{const coarse=matchMedia('(pointer:coarse)').matches,ua=navigator.userAgent;
+  const mobile=/Android|iPhone|iPod|Mobile|HarmonyOS/i.test(ua)||(coarse&&/iPad|Macintosh/.test(ua)&&navigator.maxTouchPoints>1)||(coarse&&Math.min(screen.width,screen.height)<600);
+  let gpu='';try{const ext=glc.getExtension('WEBGL_debug_renderer_info');if(ext)gpu=String(glc.getParameter(ext.UNMASKED_RENDERER_WEBGL)||'')}catch(e){}
+  const mem=navigator.deviceMemory||8,cores=navigator.hardwareConcurrency||8;
+  const weak=/Mali-(4|T)|Mali-G(31|51|52|57|68)\b|Adreno \(TM\) [3-5]\d\d|Adreno \(TM\) 6[0-1]\d|PowerVR|SGX|Intel.*HD Graphics [2-5]\d{2,3}/i.test(gpu)||mem<=3||cores<=4;
+  let tier=mobile?(weak?'fast':'bal'):(weak?'bal':'high');try{const s=localStorage.getItem('boraIsle_tier');if(QL[s]&&s!=='ultra')tier=s}catch(e){}
+  return{coarse,mobile,gpu,weak,tier}})();
+const AQ={tier:DEV.tier,low:0,good:0,warm:0};
+let QK='auto',Q=QL[AQ.tier],dynScale=DEV.mobile?.75:.85;
 function makeRTs(){[sceneRT,reflRT,raysRT,...bloomRT].forEach(r=>r&&r.dispose());
   sceneRT=new THREE.WebGLRenderTarget(4,4,{type:HDR,samples:gl2?Math.min(MS,Q.ms):0});reflRT=new THREE.WebGLRenderTarget(4,4,{type:HDR});
   raysRT=new THREE.WebGLRenderTarget(4,4,{type:HDR,depthBuffer:false});bloomRT=[];for(let i=0;i<NBL;i++)bloomRT.push(new THREE.WebGLRenderTarget(4,4,{type:HDR,depthBuffer:false}));
@@ -921,18 +967,27 @@ function renderPipeline(){renderReflection();
   mComp.uniforms.uRays.value=rays;mComp.uniforms.uLow.value=typeof PY!=='undefined'&&ctl.walk&&!PY.dead?ss(.3,.05,PY.hp/PS.hp)*.8:0;mComp.uniforms.uExp.value=EXPO*(U.uUnder.value?1.15:1);pass(mComp,null)}
 renderer.shadowMap.autoUpdate=false;
 
-function setQuality(k){QK=k;Q=k==='auto'?QL.high:QL[k];dynScale=k==='auto'?Math.min(dynScale,.9):Q.scale;
-  const sz=Q.sh;if(sun.shadow.mapSize.x!==sz){sun.shadow.mapSize.set(sz,sz);if(sun.shadow.map){sun.shadow.map.dispose();sun.shadow.map=null}}
-  renderer.setPixelRatio(BASE_DPR*dynScale);renderer.setSize(innerWidth,innerHeight);if(!DIRECT){makeRTs()}paramsVer++;cullVeg(true);GU.uRad.value=Math.min(GRAD,Q.gr);
-  document.querySelectorAll('#qual button').forEach(b=>b.classList.toggle('on',b.dataset.k===k))}
+function applyQ(){const sz=DEV.mobile?Math.min(Q.sh,2048):Q.sh;if(sun.shadow.mapSize.x!==sz){sun.shadow.mapSize.set(sz,sz);if(sun.shadow.map){sun.shadow.map.dispose();sun.shadow.map=null}}
+  renderer.setPixelRatio(BASE_DPR*dynScale);renderer.setSize(innerWidth,innerHeight);if(!DIRECT){makeRTs()}paramsVer++;cullVeg(true);GU.uRad.value=Math.min(GRAD,Q.gr)}
+function setQuality(k){QK=k;Q=k==='auto'?QL[AQ.tier]:QL[k];dynScale=k==='auto'?Math.min(dynScale,DEV.mobile?.8:.9):Q.scale;AQ.low=AQ.good=0;applyQ();
+  document.querySelectorAll('#qual button').forEach(b=>b.classList.toggle('on',b.dataset.k===k));const qa=document.querySelector('#qual button[data-k=auto]');if(qa)qa.textContent=k==='auto'?`自动·${Q.n}`:'自动'}
+const TIERS=['fast','bal','high'];
+function stepTier(dir){const i=TIERS.indexOf(AQ.tier)+dir;if(i<0||i>=TIERS.length)return;AQ.tier=TIERS[i];Q=QL[AQ.tier];dynScale=dir<0?.8:.65;AQ.low=AQ.good=0;applyQ();
+  try{localStorage.setItem('boraIsle_tier',AQ.tier)}catch(e){}const qa=document.querySelector('#qual button[data-k=auto]');if(qa)qa.textContent=`自动·${Q.n}`;
+  if(typeof toast==='function')toast(dir<0?`画面有点卡，已自动切换到「${Q.n}」画质`:`运行流畅，已自动提升到「${Q.n}」画质`,'#9fd0ff')}
 const VLIM={palm:'tree',tree:'tree',bush:'bush',grass:'grass'},vpos=new THREE.Vector3();
 function cullVeg(force){const cp=camera.position;let changed=false;for(const t in vegMeshes){const lim=Q[VLIM[t]]*(t==='palm'?1.3:1);
   for(const m of vegMeshes[t]){if(!m.boundingSphere)continue;const d=vpos.copy(m.boundingSphere.center).distanceTo(cp)-m.boundingSphere.radius;const v=m.count>0&&d<lim;if(v!==m.visible){m.visible=v;changed=true}}}
   if(changed&&!force)paramsVer++}
 let perfAcc=0,perfN=0,perfT=0;
 function perfTick(dt){perfAcc+=dt;perfN++;perfT+=dt;if(perfT<1)return;const avg=perfAcc/perfN,fps=Math.round(1/avg);perfAcc=perfN=perfT=0;
-  if(QK==='auto'&&!DIRECT){let ns=dynScale;if(avg>1/42)ns=Math.max(.5,dynScale-.08);else if(avg<1/57&&dynScale<1)ns=Math.min(1,dynScale+.04);
-    if(Math.abs(ns-dynScale)>.005){dynScale=ns;renderer.setPixelRatio(BASE_DPR*dynScale);renderer.setSize(innerWidth,innerHeight);sizeRT()}}
+  if(QK==='auto'&&!DIRECT){// phones aim for a steady 30+, desktops for 45+; resolution adapts first, the preset tier only when resolution is maxed out
+    const lo=DEV.mobile?1/30:1/42,hi=DEV.mobile?1/48:1/57,minS=DEV.mobile?.45:.5,maxS=DEV.mobile?.9:1;
+    let ns=dynScale;if(avg>lo)ns=Math.max(minS,dynScale-.08);else if(avg<hi&&dynScale<maxS)ns=Math.min(maxS,dynScale+.04);
+    if(Math.abs(ns-dynScale)>.005){dynScale=ns;renderer.setPixelRatio(BASE_DPR*dynScale);renderer.setSize(innerWidth,innerHeight);sizeRT()}
+    if(started&&++AQ.warm>4){
+      if(avg>1/26&&dynScale<=minS+.001){if(++AQ.low>=3)stepTier(-1)}else AQ.low=0;
+      if(avg<hi&&dynScale>=maxS-.001){if(++AQ.good>=15)stepTier(1)}else AQ.good=0}}
   if($('perf'))$('perf').textContent=`${fps} fps · 渲染 ${Math.round(dynScale*100)}%${DIRECT?' · 基础模式':''}`}
 
 /* ================= audio ================= */
@@ -1002,14 +1057,21 @@ if(!TEST){
   addEventListener('keyup',e=>ctl.keys[e.code]=false);
   // touch: left joystick, right side look, pinch dolly
   const touches={};let pinch=null;
-  cv.addEventListener('touchstart',e=>{for(const t of e.changedTouches){touches[t.identifier]={x:t.clientX,y:t.clientY,sx:t.clientX,sy:t.clientY,joy:t.clientX<innerWidth*.4&&t.clientY>innerHeight*.45}}
-    const ids=Object.keys(touches);if(ids.length===2){const a=touches[ids[0]],b=touches[ids[1]];if(!a.joy&&!b.joy)pinch=Math.hypot(a.x-b.x,a.y-b.y)}e.preventDefault()},{passive:false});
+  // floating joystick: the base jumps to wherever the thumb lands in the left zone
+  const joyAt=(x,y)=>{const jb=$('joyBase'),r=jb.offsetWidth/2;if(x==null){jb.style.left=jb.style.top=jb.style.bottom='';jb.classList.remove('on');return}
+    jb.style.left=(x-r)+'px';jb.style.top=(y-r)+'px';jb.style.bottom='auto';jb.classList.add('on')};
+  cv.addEventListener('touchstart',e=>{for(const t of e.changedTouches){const joy=t.clientX<innerWidth*.4&&t.clientY>innerHeight*.35&&!Object.values(touches).some(o=>o.joy);
+      touches[t.identifier]={x:t.clientX,y:t.clientY,sx:t.clientX,sy:t.clientY,t0:performance.now(),joy};if(joy)joyAt(t.clientX,t.clientY)}
+    const ids=Object.keys(touches);if(ids.length===2){const a=touches[ids[0]],b=touches[ids[1]];if(!a.joy&&!b.joy){pinch=Math.hypot(a.x-b.x,a.y-b.y);a.pinched=b.pinched=true}}e.preventDefault()},{passive:false});
   cv.addEventListener('touchmove',e=>{for(const t of e.changedTouches){const o=touches[t.identifier];if(!o)continue;
       if(o.joy){const dx=t.clientX-o.sx,dy=t.clientY-o.sy;ctl.touchMove=[clamp(dx/60,-1,1),clamp(-dy/60,-1,1)];$('joy').style.transform=`translate(${clamp(dx,-50,50)}px,${clamp(dy,-50,50)}px)`}
       else if(!pinch){ctl.yaw-=(t.clientX-o.x)*.0045;ctl.pitch=clamp(ctl.pitch-(t.clientY-o.y)*.0045,-1.52,1.52)}o.x=t.clientX;o.y=t.clientY}
     const ids=Object.keys(touches);if(pinch&&ids.length===2){const a=touches[ids[0]],b=touches[ids[1]],d=Math.hypot(a.x-b.x,a.y-b.y);const f=new THREE.Vector3();camera.getWorldDirection(f);
       ctl.fovT=clamp(ctl.fovT*Math.exp(-(d-pinch)*.004),12,90);pinch=d}e.preventDefault()},{passive:false});
-  const tend=e=>{for(const t of e.changedTouches){if(touches[t.identifier]&&touches[t.identifier].joy){ctl.touchMove=[0,0];$('joy').style.transform=''}delete touches[t.identifier]}if(Object.keys(touches).length<2)pinch=null};
+  const tend=e=>{for(const t of e.changedTouches){const o=touches[t.identifier];if(!o)continue;
+      if(o.joy){ctl.touchMove=[0,0];$('joy').style.transform='';joyAt(null)}
+      else if(e.type==='touchend'&&!o.pinched&&Math.hypot(t.clientX-o.sx,t.clientY-o.sy)<12&&performance.now()-o.t0<320)clickWalk(t.clientX,t.clientY);   // tap = walk there / attack monster
+      delete touches[t.identifier]}if(Object.keys(touches).length<2)pinch=null};
   cv.addEventListener('touchend',tend);cv.addEventListener('touchcancel',tend);
 }
 function toggleWalk(){ctl.walk=!ctl.walk;ctl.vy=0;if($('walkBtn'))$('walkBtn').textContent=ctl.walk?'当前：步行模式（F 切换）':'当前：飞行模式（F 切换）'}
@@ -2028,7 +2090,8 @@ function tipWorld(){return VIEW===camera?rod.localToWorld(tipV.set(0,1.75,0)):HE
 function handWorld(side){const v=new THREE.Vector3();(side==='L'?HERO.L.hand:HERO.R.hand).getWorldPosition(v);return v}
 function sitToggle(){if(!ctl.walk||PY.dead)return;PA.sit=!PA.sit;if(PA.sit)toast('坐下休息（生命恢复加快），移动即可起身','#c9e7ff')}
 function sprinting(){const k=ctl.keys,mv=(k.KeyW||k.KeyA||k.KeyS||k.KeyD||k.ArrowUp||k.ArrowDown||k.ArrowLeft||k.ArrowRight||Math.hypot(...ctl.touchMove)>.3||!!ctl.mv);
-  const want=mv&&(k.ShiftLeft||k.ShiftRight||(ctl.lmb&&performance.now()-ctl.lmb>180));return ctl.walk&&want&&!ST.lock&&ST.v>0}
+  const want=mv&&(k.ShiftLeft||k.ShiftRight||(ctl.lmb&&performance.now()-ctl.lmb>180)||Math.hypot(...ctl.touchMove)>.95);   // stick pushed to the rim = run
+  return ctl.walk&&want&&!ST.lock&&ST.v>0}
 function updateStamina(dt,t){if(ctl.running){ST.v=Math.max(0,ST.v-20*dt);ST.last=t;if(ST.v<=0){ST.lock=true;toast('体力耗尽，先走一会儿吧','#ffd98a')}}
   else if(t-ST.last>.8)ST.v=Math.min(100,ST.v+14*dt);if(ST.lock&&ST.v>=25)ST.lock=false}
 function updatePlayer(t,dt){const third=ctl.walk;VIEW=third?tpCam:camera;HERO.root.visible=third;
@@ -2137,6 +2200,13 @@ function frame(now,dtOverride,noRender){const dt=dtOverride!==undefined?dtOverri
 window.__APP={clickWalk,pickClick,tpCam,get VIEW(){return VIEW},setHero,HDEF,get HERO(){return HERO},PA,ctl,SW,TP,BW,lockTargets,bowAttack,CHAL,CH_SITES,startChallenge,switchWeapon,SHELLS,snapshot,applySnapshot,resetWorld,frame,go,lookAt,P,applyParams,camera,SPOTS,PL,MON,CHESTS,PY,attack,castLine:(x,z,y,w)=>{ctl.walk=true;castLine({x,z,y,w})}};
 prog(1,'准备就绪');
 if(!TEST){$('start').disabled=false;$('start').textContent='开始探索';buildMinimap();const hasAuto=!!(readSave('boraIsle_v1')||{}).pos;$('start').textContent=hasAuto?'继续冒险':'开始探索';if(hasAuto)$('newGame').style.display='inline-block';
+  // phones: settings panel starts closed; fullscreen + landscape lock on the first tap (Android; iOS ignores both, the rotate hint covers it)
+  const fsEl=document.documentElement,fsOn=()=>!!(document.fullscreenElement||document.webkitFullscreenElement),fsCan=!!(fsEl.requestFullscreen||fsEl.webkitRequestFullscreen);
+  const goFull=()=>{if(!DEV.coarse||!fsCan||fsOn())return;try{Promise.resolve(fsEl.requestFullscreen?fsEl.requestFullscreen({navigationUI:'hide'}):fsEl.webkitRequestFullscreen())
+    .then(()=>screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape')).catch(()=>{})}catch(e){}};
+  const fsSync=()=>$('fsBtn').classList.toggle('can',fsCan&&!fsOn());fsSync();document.addEventListener('fullscreenchange',fsSync);document.addEventListener('webkitfullscreenchange',fsSync);
+  $('fsBtn').onclick=goFull;if(DEV.coarse){$('panel').classList.add('hide');const pt=$('panelToggle');pt.textContent='设置';$('btnRow').appendChild(pt)}
+  $('start').addEventListener('click',goFull);$('newGame').addEventListener('click',goFull);
   $('start').onclick=()=>{const sv=readSave('boraIsle_v1');if(sv&&sv.pos)applySnapshot(sv);started=true;$('loader').classList.add('hide');initAudio();if(PY.heroUnset)openHeroSel(firstGuide);else firstGuide()};
   $('newGame').onclick=()=>{if(!confirm('开始新的冒险？自动存档会被清空（手动存档位保留）。'))return;localStorage.removeItem('boraIsle_v1');resetWorld();started=true;$('loader').classList.add('hide');initAudio();openHeroSel(firstGuide)};
   $('saveBtn').onclick=()=>toggleSave();$('heroBtn').onclick=()=>openHeroSel();$('guideBtn').onclick=()=>openGuide();$('guideClose').onclick=()=>openGuide(false);
